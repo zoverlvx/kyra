@@ -1,8 +1,16 @@
 const server = require("express")();
 const request = require("request");
-const KEY = "AIzaSyDvSaImRfPecutxUo833sNROdjbhaDPYQQ";
-const CHANNEL_ID = "OCvO6uJUVJQ6SrATfsWR5_aA";
-const URL = `https://www.googleapis.com/youtube/v3/search?key=${KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20`
+const KEY = process.env.API_KEY;
+const CHANNEL_ID = "UCvO6uJUVJQ6SrATfsWR5_aA"
+const URL = `https://www.googleapis.com/youtube/v3/search?type=video&key=${KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=20`
+
+/* 
+FOR USE IN DEV ONLY. ALLOWS CROSS ORIGIN. HACK TO GET AROUND CHROME
+*/
+server.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+})
 
 function makeAPICall(cb) {
     request(URL, {json: true}, function(err, res, body) {
@@ -13,8 +21,7 @@ function makeAPICall(cb) {
 
 server.get("/", function(req, res) {
     makeAPICall(function(response) {
-        res.write(JSON.stringify(response));
-        res.end();
+        res.end(JSON.stringify(response));
     });
 });
 
