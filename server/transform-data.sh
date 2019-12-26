@@ -1,0 +1,1 @@
+env $(cat ./.env) node handleChannels.js | jq '.items[] | [{ channelId: .snippet.channelId, channelTitle: .snippet.channelTitle, videoId: .id.videoId,  publishedAt: .snippet.publishedAt, title: .snippet.title, description: .snippet.description, thumbnails: .snippet.thumbnails}]' > ./db.json
