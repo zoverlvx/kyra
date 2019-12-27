@@ -1,0 +1,31 @@
+// modules are undefined
+"use strict";
+const fs = require("fs");
+const readline = require("readline");
+const async = require("async");
+
+// https://www.gyanblog.com/gyan/how-to-fetch-json-all-videos-youtube-channel/
+
+const youtubeService = require("youtube-api-es6").youtubeService;
+console.log(youtubeService);
+const youtubeConfig = {
+	key: process.env.API_KEY
+};
+
+const readChannelIds = readline.createInterface({
+	input: fs.createReadStream("./channels.txt"),
+	//output: process.stdout,
+	console: false
+});
+
+readChannelIds.on("line", function(channelId) {
+	console.log(channelId);
+
+	youtubeService.init(youtubeConfig)
+		.then(function() {
+			return youtubeService
+				.fetchAllVideosFromChannel(channelId)
+		}).then(function(allVideos) {
+			console.log(allVideos);
+		})
+});
