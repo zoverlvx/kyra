@@ -37,3 +37,35 @@ Keep development, staging, and production as similar as possible
 Treat logs as event streams
 - XII. Admin processes
 Run admin/management tasks as one-off processes
+
+## Basic Architecture for Kyra Video Analyzer Tool (KVAT)
+Simple create-react-app with react-bootstrap for style. Component based development. 
+
+### Components:
+- Thumbnail
+- Thumbnail Container
+- Upload Chart
+
+### Stack
+- create-react-app (React and React DOM)
+- react-router
+- axios (promise based AJAX handler)
+
+## Unit testing (Model, View, Controller)
+
+### Controller
+Business logic is handled by Controller which is beyond scope of this exercise. Instead, we create well-defined interfaces so business logic team can untiize our model and view code.
+
+### Model Tests
+Testing is done from commandline using [jq](https://stedolan.github.io/jq/):
+
+- Model test: connect to api server
+- Model test: get a page of listed 
+- Model test: get next page
+
+### View tests
+Commponent testing done by [React Storybook](https://storybook.js.org/docs/testing/react-ui-testing/):
+- Thumbnail container
+- Thumbnail
+- Chart container
+- Upload chart
