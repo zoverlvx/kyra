@@ -1,8 +1,10 @@
 import React from "react";
+import Thumbnail from "../Thumbnail/Thumbnail.js";
 
 export default function(props) {
+	console.log("Thumbnailcontainer props: ", props)
 	function makeThumbnail(item) {
-		return <span>{item.kind}</span>
+		return <Thumbnail video={item} />;
 	}
 	return (
 		<div>
