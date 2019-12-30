@@ -9,8 +9,6 @@ function App(props) {
 		getChannel();
 	}, [getChannel]); 
 	
-	console.log("Here is props: ", props);
-	
 	if (!props.videos.length) return <div>Loading...</div>;
 	if (props.videos.length) {
 		return (
@@ -20,7 +18,6 @@ function App(props) {
 }
 
 function mapStateToProps(state) {
-	console.log("Here is initial state: ", state);
 	return  {
 		videos: state.channel.items,
 		nextPageToken: state.channel.nextPageToken 
