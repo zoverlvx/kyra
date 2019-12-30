@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import { getChannel } from "../actions";
+import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer.js";
 
 function App(props) {
 	const { getChannel } = props;
@@ -13,7 +14,7 @@ function App(props) {
 	if (!props.videos.length) return <div>Loading...</div>;
 	if (props.videos.length) {
 		return (
-			<div>{props.videos[0].kind}</div>
+			<ThumbnailContainer videos={props.videos} />
 		);
 	}
 }
