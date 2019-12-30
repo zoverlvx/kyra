@@ -8,17 +8,27 @@ function App(props) {
 		getChannel();
 	}, [getChannel]); 
 	
-	//if (state.length === 0) return <div>Loading...</div>;
 	console.log("Here is props: ", props);
-	return (
-		<div>
-			App runs
-		</div>
-	);
+	
+	if (!props.videos.length) return <div>Loading...</div>;
+	if (props.videos.length) {
+		return (
+			<div>{props.videos[0].kind}</div>
+		);
+	}
 }
 
 function mapStateToProps(state) {
-	return state;
+	console.log("Here is initial state: ", state);
+	return  {
+		videos: state.channel.items,
+		nextPageToken: state.channel.nextPageToken 
+			? state.channel.nextPageToken: null,
+		prevPageToken: state.channel.prevPageToken
+			? state.channel.prevPageToken : null,
+		error: state.error,
+		gettingChannel: state.gettingChannel
+	};
 }
 
 export default connect(mapStateToProps, {getChannel})(App);

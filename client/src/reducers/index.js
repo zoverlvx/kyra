@@ -5,7 +5,9 @@ import {
 } from "../actions";
 
 const initialState = {
-	channel: null,
+	channel: {
+		items: []
+	},
 	gettingChannel: false,
 	error: null
 };
