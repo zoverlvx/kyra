@@ -1,0 +1,83 @@
+
+
+## 12 Factors approach
+
+Recall the Heroku team's [12 factor app](https://12factor.net/):
+
+- **I. Codebase**
+One codebase tracked in revision control, many deploys
+
+**For this project**
+- Git / Github
+- https://github.com/zoverlvx/kyra 
+
+- **II. Dependencies**
+Explicitly declare and isolate dependencies
+
+"There is no explicit dependency isolation tool for JavaScript, but using Docker with the default Node images will achieve the same effect. Similarly, never install something your app needs using npm -g <package> as this will creep the dependency into any other application on your machine as well, making certain results inconsistent."
+https://medium.com/@djangoshelton/the-practical-js-12-factor-application-ii-dependencies-2a0b64f3954c
+
+- **III. Config**
+Store config in the environment
+
+**For this project**
+
+Example:
+https://github.com/FoodStandardsAgency/register-a-food-business-service/blob/master/src/config.js
+
+Question: is `env $(cat ./.env) node index.js` an OS agnostic approach to dispersing env vars into the env?
+
+- **IV. Backing services**
+Treat backing services as attached resources
+
+**For this project**
+Example: https://github.com/FoodStandardsAgency/register-a-food-business-front-end/tree/master/src/server/connectors
+
+- **V. Build, release, run**
+Strictly separate build and run stages
+- **VI. Processes**
+Execute the app as one or more stateless processes
+- **VII. Port binding**
+Export services via port binding
+- **VIII. Concurrency**
+Scale out via the process model
+- **IX. Disposability**
+Maximize robustness with fast startup and graceful shutdown
+- **X. Dev/prod parity**
+Keep development, staging, and production as similar as possible
+- **XI. Logs**
+Treat logs as event streams
+- **XII. Admin processes**
+Run admin/management tasks as one-off processes
+
+## Basic Architecture for Kyra Video Analyzer Tool (KVAT)
+Simple create-react-app with react-bootstrap for style. Component based development. 
+
+### Components:
+- Thumbnail
+- Thumbnail Container
+- Upload Chart
+
+### Stack
+- create-react-app (React and React DOM)
+- react-router
+- axios (promise based AJAX handler)
+
+## Unit testing (Model, View, Controller)
+
+### Controller
+Business logic is handled by Controller which is beyond scope of this exercise. Instead, we create well-defined interfaces so business logic team can untiize our model and view code.
+
+### Model Tests
+Testing is done from commandline using [jq](https://stedolan.github.io/jq/):
+
+- Model test: connect to api server
+- Model test: get a page of listed 
+- Model test: get next page
+
+### View tests
+Commponent testing done by [React Storybook](https://storybook.js.org/docs/testing/react-ui-testing/):
+- Thumbnail container
+- Thumbnail
+- Chart container
+- Upload chart
