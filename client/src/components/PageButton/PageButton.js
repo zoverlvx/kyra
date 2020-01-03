@@ -5,7 +5,7 @@ export default function(props) {
 	if (prevPage) { 
 		return (
 			<button
-				onClick={() => getChannel(prevPage)}	
+				onClick={() => getChannel({ token: prevPage })}	
 			>
 				Previous Page
 			</button>
@@ -14,7 +14,7 @@ export default function(props) {
 	if (nextPage) { 
 		return (
 			<button
-				onClick={() => getChannel(nextPage)}
+				onClick={() => getChannel({ token: nextPage })}
 			>
 				Next Page
 			</button>

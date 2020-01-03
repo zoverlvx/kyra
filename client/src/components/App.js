@@ -4,6 +4,7 @@ import { NavLink, Route } from "react-router-dom";
 import { getChannel } from "../actions";
 import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer.js";
 import PageButton from "./PageButton/PageButton.js";
+import Calendar from "./Calendar/Calendar.js";
 
 function App(props) {
 	const { getChannel } = props;
@@ -15,7 +16,7 @@ function App(props) {
 	if (props.videos.length) {
 		return (
 			<>
-				<NavLink to="/graph">Go to Graph</NavLink>
+				<NavLink to="/calendar">Go to Calendar</NavLink>
 				<Route 
 					exact path="/"
 					render={function() {
@@ -38,8 +39,8 @@ function App(props) {
 					}
 				/>
 				<Route 
-					path="/graph" 
-					render={() => <div>Spot for the graph</div>}
+					path="/calendar" 
+					render={() => <Calendar />}
 				/>
 			</>
 		);
