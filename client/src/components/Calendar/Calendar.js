@@ -1,9 +1,6 @@
-import React from "react";
-import { Chart } from "react-google-charts";
-
-// need to make separate call to YT upon mount.
-// Double-check the API to see if you can get videos by dates
-// Do not take props from App
+import { connect } from "react-redux";
+import { getChannel } from "../../actions"
+import makeChart from "../utils/makeChart.js";
 
 /*
 
@@ -15,42 +12,16 @@ If the data values are all positive, the colors will range from white to blue, w
 
 */
 
-export default function({videos}) {
+const Calendar = makeChart({
+	width: 1000, 
+	height: 350, 
+	chartType: "Calendar"
+});
 
-	// gets published dates of videos
-	const publishedDates = [...videos].map(item => item.snippet.publishedAt);
-	// sorts dates chronologically
-	const chronological = [...publishedDates].sort();
-
-
-	return (
-		<Chart
-			width={1000}
-			height={350}
-			chartType="Calendar"
-			loader={<div>Loading</div>}
-			data={[
-				[
-					{
-						type: "date", 
-						id: "Date"
-					}, 
-					{
-						type: "number", 
-						id:"Produced"
-					}
-				],
-				//map through and spread everything else below
-				...chronological.map(function(date, i) {
-					return [
-						new Date(date), 
-						i
-					]
-				})
-			]}
-			options={{
-				title: "YouTube Videos Produced"
-			}}
-		/>
-	);	
+function mapStateToProps(state) {
+	return {
+		videos:	state.channel.items
+	};
 }
+
+export default connect(mapStateToProps, {getChannel})(Calendar);

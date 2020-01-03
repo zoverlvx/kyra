@@ -40,7 +40,7 @@ function App(props) {
 				/>
 				<Route 
 					path="/calendar" 
-					render={() => <Calendar videos={props.videos} /> }
+					render={() => <Calendar />}
 				/>
 			</>
 		);
