@@ -1,6 +1,9 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-import getWeek from "date-fns/getWeekOfMonth";
+
+// need to make separate call to YT upon mount.
+// Double-check the API to see if you can get videos by dates
+// Do not take props from App
 
 /*
 
@@ -14,7 +17,12 @@ If the data values are all positive, the colors will range from white to blue, w
 
 export default function({videos}) {
 
-	console.log("videos in the Calendar chart: ", videos);
+	// gets published dates of videos
+	const publishedDates = [...videos].map(item => item.snippet.publishedAt);
+	// sorts dates chronologically
+	const chronological = [...publishedDates].sort();
+
+
 	return (
 		<Chart
 			width={1000}
@@ -33,9 +41,9 @@ export default function({videos}) {
 					}
 				],
 				//map through everything else below
-				...videos.map(function(video, i) {
+				...chronological.map(function(date, i) {
 					return [
-						new Date(video.snippet.publishedAt), 
+						new Date(date), 
 						i
 					]
 				})
