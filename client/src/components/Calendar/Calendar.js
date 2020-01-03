@@ -40,7 +40,7 @@ export default function({videos}) {
 						id:"Produced"
 					}
 				],
-				//map through everything else below
+				//map through and spread everything else below
 				...chronological.map(function(date, i) {
 					return [
 						new Date(date), 
