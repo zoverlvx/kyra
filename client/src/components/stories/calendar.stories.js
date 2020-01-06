@@ -1,5 +1,6 @@
 import React from "react";
 import makeChart from "../utils/makeChart.js";
+import { action } from "@storybook/addon-actions";
 
 export default {title: "Calendar"}
 
@@ -31,9 +32,15 @@ const videos = [
 	}
 ];
 
+/*
 function getChannel(obj) {
 	console.log(obj);
 }
+*/
+
+const actions = {
+	getChannel: action("getChannel")
+};
 
 const Calendar = makeChart({
 	width: 1000,
@@ -41,4 +48,4 @@ const Calendar = makeChart({
 	chartType: "Calendar"
 });
 
-export const calendar = () => <Calendar videos={videos} getChannel={getChannel}/>;
+export const calendar = () => <Calendar videos={videos} {...actions} />;
