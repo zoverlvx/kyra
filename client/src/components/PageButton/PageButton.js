@@ -14,7 +14,7 @@ export default function(props) {
 	if (nextPage) { 
 		return (
 			<button
-				onClick={() => getChannel({ token: nextPage })}
+				onClick={() => getChannel({ token: nextPage })}	
 			>
 				Next Page
 			</button>

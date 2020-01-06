@@ -7,12 +7,6 @@ export const GET_CHANNEL_COMPLETE = "GET_CHANNEL_COMPLETE";
 
 const KEY = config.YT_KEY;
 const CHANNEL_ID="UCvO6uJUVJQ6SrATfsWR5_aA";
-//const MAX_RESULTS=12;
-//const URL = `https://www.googleapis.com/youtube/v3/search?type=video&key=${KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}`;
-
-
-
-
 
 export function getChannel(options) {
 	
@@ -33,26 +27,14 @@ export function getChannel(options) {
 			URL += `&maxResults=${options.maxResults}`;
 		}
 	}	
-
+	
 	// if no options provided
 	if (!options) {
 		// default maxResults to 12 and append to the end.
 		URL += "&maxResults=12";
 	}
 	
-
-	
-
-	
-
-	
 	const channel = axios(URL);
-
-	/*
-	const channel = token 
-	? axios.get(URL + `&pageToken=${token}`)
-	: axios.get(URL);
-	*/
 
 	return function(dispatch) {
 		dispatch({type: GET_CHANNEL_INIT});
