@@ -1,0 +1,12 @@
+1. Document getting API key
+
+2. Use Material UI to make it look nicer
+- PageButton
+- ThumbnailContainer
+1a. Tablet view
+1b. Mobile view
+
+2. Web worker that pulls data from API
+https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
+
+

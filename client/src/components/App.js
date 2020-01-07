@@ -5,18 +5,36 @@ import { getChannel } from "../actions";
 import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer.js";
 import PageButton from "./PageButton/PageButton.js";
 import Calendar from "./Calendar/Calendar.js";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 function App(props) {
 	const { getChannel } = props;
 	useEffect(() => {
 		getChannel();
 	}, [getChannel]); 
-	
+	const navLinkStyle = {
+		color: "white",
+		textDecoration: "none"
+	};	
 	if (!props.videos.length) return <div>Loading...</div>;
 	if (props.videos.length) {
 		return (
 			<>
-				<NavLink to="/calendar">Go to Calendar</NavLink>
+				<AppBar color="primary" position="static">
+					<Toolbar>
+						<Typography
+							variant="title"
+							color="inherit"
+						>
+							<NavLink 
+								style={navLinkStyle}
+								to="/calendar"
+							>
+								Go to Calendar
+							</NavLink>
+						</Typography>
+					</Toolbar>
+				</AppBar>
 				<Route 
 					exact path="/"
 					render={function() {
