@@ -1,6 +1,28 @@
 import React from "react";
-import {Image} from "semantic-ui-react";
+import { makeStyles, GridList, GridListTile } from "@material-ui/core";
+/*
+import { Image } from "semantic-ui-react";
 
 export default function({video}) {
 	return <Image src={video.snippet.thumbnails.medium.url} />
+}
+*/
+
+const useStyles = makeStyles(theme => ({
+	gridList: {
+		width: 225,
+		height: 225,
+		paddingTop: "10px"
+	}
+}));
+
+export default function({video}) {
+	const classes = useStyles();
+	return (
+		<GridListTile className={classes.gridList}>
+			<img
+				src={video.snippet.thumbnails.medium.url} 
+			/>	
+		</GridListTile>
+	);
 }
