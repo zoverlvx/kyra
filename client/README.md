@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting Youtube API key
+1. Go here to get a [Youtube API token](https://developers.google.com/youtube/v3/)
+2. Go to [get started](https://developers.google.com/youtube/v3/getting-started)
+3. Follow instruction 1: 
+You need a [Google Account](https://www.google.com/accounts/NewAccount) to access the Google API Console, request an API key, and register your application.
+4. Follow instruction 2:
+Create a project in the [Google Developers Console](https://console.developers.google.com/) and [obtain authorization credentials](https://developers.google.com/youtube/registering_an_application) so your application can submit API requests. When obtaining authorization credentials, choose the API keys option because that is what this project originally uses.
+5. Follow instruction 3:
+After creating your project, make sure the YouTube Data API is one of the services that your application is registered to use:
+a. Go to the [API Console](https://console.developers.google.com/) and select the project that you just registered.
+b. Visit the [Enabled APIs page](https://console.developers.google.com/apis/enabled). In the list of APIs, make sure the status is ON for the YouTube Data API v3.
+6. Once you have an API key, copy-paste it into the .env file in the root directory of the project. 
+
 ## Available Scripts
 
 In the project directory, you can run:
