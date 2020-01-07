@@ -1,0 +1,14 @@
+TABLE OF VIDEOS
+id: number
+channelId: string
+channelTitle: string
+videoId: string - unique
+title: string
+description: string
+publishedAt: string
+title: string
+
+TABLE OF THUMBNAILS
+default: string
+medium: string
+high: string
