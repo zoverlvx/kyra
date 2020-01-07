@@ -1,6 +1,9 @@
 import React from "react";
 import Thumbnail from "../Thumbnail/Thumbnail.js";
-import { makeStyles } from "@material-ui/core";
+import { 
+	makeStyles, 
+	GridList
+} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -19,8 +22,10 @@ export default function(props) {
 	}
 
 	return (
-		<div className={classes.root}>
-			{props.videos.map(makeThumbnail)}
+		<div 
+			className={classes.root}
+		>
+				{props.videos.map(makeThumbnail)}
 		</div>
 	);
 }

@@ -38,12 +38,16 @@ export default function(options) {
 				...chronological.map(function(date, i) {
 					return [
 						new Date(date), 
-						i
+						1
 					]
 				})
 			]}
 			options={{
-				title: "YouTube Videos Produced"
+				title: "YouTube Videos Produced",
+				colorAxis: {
+					maxValue: 1,
+					minValue: 0
+				}
 			}}
 		/>
 	);	

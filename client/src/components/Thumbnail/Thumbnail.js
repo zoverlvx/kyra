@@ -10,7 +10,7 @@ export default function({video}) {
 
 const useStyles = makeStyles(theme => ({
 	gridList: {
-		width: 225,
+		width: 300,
 		height: 225,
 		paddingTop: "10px"
 	}
