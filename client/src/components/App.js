@@ -1,40 +1,31 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
-import { NavLink, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { getChannel } from "../actions";
 import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer.js";
 import PageButton from "./PageButton/PageButton.js";
 import Calendar from "./Calendar/Calendar.js";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import Navigation from "./Navigation/Navigation.js";
+
+/*
+	Navigation component in Routes
+	so that it's always in view
+		Route to Home/Thumbnails
+		Route to Calendar Chart
+*/
 
 function App(props) {
+	console.log("props in app: ", props)
 	const { getChannel } = props;
 	useEffect(() => {
 		getChannel();
 	}, [getChannel]); 
-	const navLinkStyle = {
-		color: "white",
-		textDecoration: "none"
-	};	
+		
 	if (!props.videos.length) return <div>Loading...</div>;
 	if (props.videos.length) {
 		return (
 			<>
-				<AppBar color="primary" position="static">
-					<Toolbar>
-						<Typography
-							variant="title"
-							color="inherit"
-						>
-							<NavLink 
-								style={navLinkStyle}
-								to="/calendar"
-							>
-								Go to Calendar
-							</NavLink>
-						</Typography>
-					</Toolbar>
-				</AppBar>
+				<Navigation {...props} />		
 				<Route 
 					exact path="/"
 					render={function() {
