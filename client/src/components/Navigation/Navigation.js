@@ -2,14 +2,11 @@ import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 
-export default function(props) {
-	console.log("props in navigation: ", props);
-
+export default function({to, text}) {
 	const navLinkStyle = {
 		color: "white",
 		textDecoration: "none"
 	};
-
 	return (
 		<AppBar color="primary" position="static">
 			<Toolbar>
@@ -19,9 +16,9 @@ export default function(props) {
 				>
 					<NavLink 
 						style={navLinkStyle}
-						to="/calendar"
+						to={to}
 					>
-						Go to Calendar
+						{text}
 					</NavLink>
 				</Typography>
 			</Toolbar>

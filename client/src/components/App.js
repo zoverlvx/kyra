@@ -15,7 +15,6 @@ import Navigation from "./Navigation/Navigation.js";
 */
 
 function App(props) {
-	console.log("props in app: ", props)
 	const { getChannel } = props;
 	useEffect(() => {
 		getChannel();
@@ -25,31 +24,16 @@ function App(props) {
 	if (props.videos.length) {
 		return (
 			<>
-				<Navigation {...props} />		
-				<Route 
-					exact path="/"
-					render={function() {
-							return (
-								<>
-									<ThumbnailContainer 
-										videos={props.videos} 
-									/>
-									<PageButton 
-										prevPage={props.prevPageToken} 
-										getChannel={getChannel}
-									/>
-									<PageButton 
-										nextPage={props.nextPageToken} 
-										getChannel={getChannel}
-									/>
-								</>
-							);
-						}
-					}
+				<ThumbnailContainer 
+					videos={props.videos} 
 				/>
-				<Route 
-					path="/calendar" 
-					render={() => <Calendar />}
+				<PageButton 
+					prevPage={props.prevPageToken} 
+					getChannel={getChannel}
+				/>
+				<PageButton 
+					nextPage={props.nextPageToken} 
+					getChannel={getChannel}
 				/>
 			</>
 		);

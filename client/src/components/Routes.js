@@ -9,12 +9,16 @@ export default function () {
 			<>
 				<Route 
 					exact path="/"
-					render={(rrprops) => <App {...rrprops} />}
-				/>
+				>
+					<Navigation to="/calendar" text="Go to Calendar" />
+					<App />
+				</Route>
 				<Route 
 					path="/calendar" 
-					render={(rrprops) => <Calendar {...rrprops} />}
-				/>
+				>
+					<Navigation to="/" text="Go to Thumbnails" />
+					<Calendar />
+				</Route>
 			</>
 		);
 }
