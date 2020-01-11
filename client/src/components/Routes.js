@@ -1,70 +1,45 @@
-import React from "react";
-import { NavLink, Route} from "react-router-dom";
-import App from "./App.js"
+import React, {useEffect} from "react";
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { getChannel } from "../actions";
+import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer";
 import Calendar from "./Calendar/Calendar.js";
 import Navigation from "./Navigation/Navigation.js";
+import PageButton from "./PageButton/PageButton.js";
 
-export default function () {
-		return (
-			<>
-				<Route 
-					exact path="/"
-				>
-					<Navigation to="/calendar" text="Go to Calendar" />
-					<App />
-				</Route>
-				<Route 
-					path="/calendar" 
-				>
-					<Navigation to="/" text="Go to Thumbnails" />
-					<Calendar />
-				</Route>
-			</>
-		);
+function mapStateToProps(state) {
+	return {
+		nextPageToken: state.channel.nextPageToken 
+			? state.channel.nextPageToken : null,
+		prevPageToken: state.channel.prevPageToken
+			? state.channel.prevPageToken : null
+	};
 }
 
-/*
-function App(props) {
-	const {location: {pathname} } = props;
-	console.log("Here are the props: ", props);
-	console.log("Here is the pathname: ", pathname);
-
-	if (pathname === "/") {
-		return (
-			<>
-				<NavLink
-					to="/calendar"
-				>
-					Go to Calendar
-				</NavLink>
-				<div>Thumbnails</div>
-			</>
-		);			
-	}
-
-	if (pathname === "/calendar") {
-		return (
-			<>
-				<NavLink
-					to="/"
-				>
-					Go to Home
-				</NavLink>
-				<div>Here is the Calendar</div>
-			</>
-		);
-	}
-}
-
-export default function() {
+export default connect(
+	mapStateToProps, 
+	{getChannel}
+)(function (props) {
+	const { getChannel } = props;
+	useEffect(() => {
+		getChannel();
+	}, [getChannel]);
 	return (
 		<>
 			<Route 
 				exact path="/"
-				render={props => <App {...props} />}
-			/>			
+			>
+				<Navigation to="/calendar" text="Go to Calendar" />
+				<ThumbnailContainer />
+				<PageButton prevPage={props.prevPageToken} />
+				<PageButton nextPage={props.nextPageToken} />
+			</Route>
+			<Route 
+				path="/calendar" 
+			>
+				<Navigation to="/" text="Go to Thumbnails" />
+				<Calendar />
+			</Route>
 		</>
-	)
-}
-*/
-
+	);
+});

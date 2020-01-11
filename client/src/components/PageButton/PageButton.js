@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getChannel } from "../../actions";
 
-export default function(props) {
+export default connect(null, {getChannel})(function(props) {
 	const { prevPage, nextPage, getChannel} = props;
 	if (prevPage) { 
 		return (
@@ -21,4 +23,4 @@ export default function(props) {
 		);
 	}
 	return null;
-}
+});

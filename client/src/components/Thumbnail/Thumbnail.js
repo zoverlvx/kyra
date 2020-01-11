@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, GridList, GridListTile } from "@material-ui/core";
+import { makeStyles, GridListTile } from "@material-ui/core";
 /*
 import { Image } from "semantic-ui-react";
 
