@@ -1,25 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getChannel } from "../../actions";
+import { Button } from "@material-ui/core";
 
 export default connect(null, {getChannel})(function(props) {
 	const { prevPage, nextPage, getChannel} = props;
 	if (prevPage) { 
 		return (
-			<button
+			<Button
+				color="primary"
+				variant="outlined"
 				onClick={() => getChannel({ token: prevPage })}	
 			>
 				Previous Page
-			</button>
+			</Button>
 		);
 	}
 	if (nextPage) { 
 		return (
-			<button
+			<Button
+				color="primary"
+				variant="outlined"
 				onClick={() => getChannel({ token: nextPage })}	
 			>
 				Next Page
-			</button>
+			</Button>
 		);
 	}
 	return null;
