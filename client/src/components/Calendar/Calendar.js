@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { getChannel } from "../../actions"
 import makeChart from "../utils/makeChart.js";
 
 /*
@@ -24,4 +23,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {getChannel})(Calendar);
+export default connect(mapStateToProps)(Calendar);
