@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { getChannel } from "../actions";
@@ -21,10 +21,22 @@ export default connect(
 	mapStateToProps, 
 	{getChannel}
 )(function (props) {
-	const { getChannel } = props;
+	const { getChannel, nextPageToken } = props;
+	
 	useEffect(() => {
-		getChannel();
-	}, [getChannel]);
+		// Get channel contents on first mount
+		getChannel(); 
+		const refresh = setInterval(() => {
+			/* renew at 12:01am every day */
+			const today = new Date();
+			const currentTime = `${today.getHours()}:${today.getMinutes()}`;
+			if (currentTime === "00:01") {
+				getChannel();
+			}
+		}, 20000)
+		return () => clearInterval(refresh)
+	}, [])
+
 	return (
 		<>
 			<Route 
