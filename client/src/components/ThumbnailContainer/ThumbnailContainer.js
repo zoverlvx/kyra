@@ -33,14 +33,25 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 	const [thumbnails, setThumbnails] = useState([]);
 	const [thumbnailPages, setThumbnailPages] = useState({from: 0, to: 12})
 	const classes = useStyles();
-
+	
+	// these need to be in utils
 	function makeThumbnail(item) {
 		return <Thumbnail video={item} />;
 	}
-
-	function makeButtons(thumbnailPages) {
+	
+	function makeButtons(thumbnailPages, setThumbnailPages, props) {
 		const buttons = [];
 		const { from, to } = thumbnailPages;
+		const next = to === 48 
+			? function() {
+					console.log("Here is the next page token: ", props.nextPageToken)
+					props.getChannel({token: props.nextPageToken})
+					setThumbnailPages({from: 0, to: 12});
+				} 
+			: () => setThumbnailPages({
+					from: from + 12,
+					to: to + 12
+				})
 
 		if (from > 0 || props.prevPageToken) {
 			buttons.push(
@@ -54,14 +65,10 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 			);
 		}
 
-		if (to <= 48 && props.nextPageToken) {
+		if ((to <= 48 && props.nextPageToken) || to < 48) {
 			buttons.push(
 				<PageButton 
-					toNext={() => setThumbnailPages({
-							from: from + 12,
-							to: to + 12
-						})
-					} 
+					toNext={next} 
 				/>
 			);
 		}
@@ -89,7 +96,13 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 						color="primary"
 						aria-label="outlined primary button group"
 					>
-						{makeButtons(thumbnailPages)}
+						{
+							makeButtons(
+								thumbnailPages,
+								setThumbnailPages,
+								props
+							)
+						}
 						{/*
 						<PageButton 
 							toPrevious={() => setThumbnailPages({
