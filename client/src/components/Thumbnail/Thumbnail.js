@@ -3,7 +3,7 @@ import { makeStyles, GridListTile } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
 	gridList: {
-		width: 300,
+		width: 400,
 		height: 225,
 		paddingTop: "10px",
 		listStyleType: "none"
