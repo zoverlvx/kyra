@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
-import Thumbnail from "../Thumbnail/Thumbnail.js";
-import PageButton from "../PageButton/PageButton.js";
 import { ButtonGroup } from "@material-ui/core";
 import {getChannel} from "../../actions";
+import makeThumbnail from "../utils/makeThumbnail.js";
+import makeButtons from "../utils/makeButtons.js";
+
 import { 
 	makeStyles, 
 } from "@material-ui/core";
@@ -34,51 +35,7 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 	const [thumbnailPages, setThumbnailPages] = useState({from: 0, to: 12})
 	const classes = useStyles();
 	
-	// these need to be in utils
-	function makeThumbnail(item) {
-		return <Thumbnail video={item} />;
-	}
 	
-	function makeButtons(thumbnailPages, setThumbnailPages, props) {
-		const buttons = [];
-		const { from, to } = thumbnailPages;
-		const getNext = to === 48 
-			? function() {
-				props.getChannel({token: props.nextPageToken})
-				setThumbnailPages({from: 0, to: 12});
-			} 
-			: () => setThumbnailPages({
-					from: from + 12,
-					to: to + 12
-				})
-		const getPrevious = from === 0
-			? function() {
-				props.getChannel({token: props.prevPageToken})
-				setThumbnailPages({from: 36, to: 48})
-			}
-			: () => setThumbnailPages({
-				from: from - 12,
-				to: to - 12
-			})
-
-		if (from > 0 || props.prevPageToken) {
-			buttons.push(
-				<PageButton 
-					toPrevious={getPrevious}
-				/>
-			);
-		}
-
-		if (props.nextPageToken) {
-			buttons.push(
-				<PageButton 
-					toNext={getNext} 
-				/>
-			);
-		}
-
-		return buttons;
-	}
 
 	const {videos} = props;
 	
