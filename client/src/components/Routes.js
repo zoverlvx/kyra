@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { getChannel } from "../actions";
@@ -21,7 +21,7 @@ export default connect(
 	mapStateToProps, 
 	{getChannel}
 )(function (props) {
-	const { getChannel, nextPageToken } = props;
+	const { getChannel } = props;
 	
 	useEffect(() => {
 		// Get channel contents on first mount
