@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import Thumbnail from "../Thumbnail/Thumbnail.js";
+import PageButton from "../PageButton/PageButton.js";
+import { ButtonGroup } from "@material-ui/core";
+import {getChannel} from "../../actions";
 import { 
 	makeStyles, 
-	GridList
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -17,27 +19,94 @@ const useStyles = makeStyles(theme => ({
 
 function mapStateToProps(state) {
 	return  {
+		nextPageToken: state.channel.nextPageToken 
+			? state.channel.nextPageToken : null,
+		prevPageToken: state.channel.prevPageToken
+			? state.channel.prevPageToken : null,
 		videos: state.channel.items,
 		error: state.error,
 		gettingChannel: state.gettingChannel
 	};
 }
 
-export default connect(mapStateToProps)(function(props) {
+export default connect(mapStateToProps, {getChannel})(function(props) {
+	const [thumbnails, setThumbnails] = useState([]);
+	const [thumbnailPages, setThumbnailPages] = useState({from: 0, to: 12})
 	const classes = useStyles();
 
 	function makeThumbnail(item) {
 		return <Thumbnail video={item} />;
 	}
+
+	function makeButtons(thumbnailPages) {
+		const buttons = [];
+		const { from, to } = thumbnailPages;
+
+		if (from > 0 || props.prevPageToken) {
+			buttons.push(
+				<PageButton 
+					toPrevious={() => setThumbnailPages({
+							from: from - 12,
+							to: to - 12
+						})
+					}
+				/>
+			);
+		}
+
+		if (to <= 48 && props.nextPageToken) {
+			buttons.push(
+				<PageButton 
+					toNext={() => setThumbnailPages({
+							from: from + 12,
+							to: to + 12
+						})
+					} 
+				/>
+			);
+		}
+
+		return buttons;
+	}
+
+	const {videos} = props;
+	
+	useEffect(() => {
+		const { from, to } = thumbnailPages;
+		setThumbnails(videos.slice(from, to))
+	}, [videos, thumbnailPages])
 	
 	if (props.error) return <div>There's been an error</div>;
-	if (!props.videos.length) return <div>Loading...</div>;
-	if (props.videos.length) {
+	if (!thumbnails.length) return <div>Loading...</div>;
+	if (thumbnails.length) {
+		//const {from, to} = thumbnailPages;
 		return (
 			<div 
 				className={classes.root}
 			>
-					{props.videos.map(makeThumbnail)}
+					{thumbnails.map(makeThumbnail)}
+					<ButtonGroup
+						color="primary"
+						aria-label="outlined primary button group"
+					>
+						{makeButtons(thumbnailPages)}
+						{/*
+						<PageButton 
+							toPrevious={() => setThumbnailPages({
+									from: from - 12,
+									to: to - 12
+								})
+							}
+						/>
+						<PageButton 
+							toNext={() => setThumbnailPages({
+									from: from + 12,
+									to: to + 12
+								})
+							} 
+						/>
+						*/}
+					</ButtonGroup>
 			</div>
 		);
 	}
