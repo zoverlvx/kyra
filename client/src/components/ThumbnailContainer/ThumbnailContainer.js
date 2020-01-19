@@ -42,33 +42,37 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 	function makeButtons(thumbnailPages, setThumbnailPages, props) {
 		const buttons = [];
 		const { from, to } = thumbnailPages;
-		const next = to === 48 
+		const getNext = to === 48 
 			? function() {
-					console.log("Here is the next page token: ", props.nextPageToken)
-					props.getChannel({token: props.nextPageToken})
-					setThumbnailPages({from: 0, to: 12});
-				} 
+				props.getChannel({token: props.nextPageToken})
+				setThumbnailPages({from: 0, to: 12});
+			} 
 			: () => setThumbnailPages({
 					from: from + 12,
 					to: to + 12
 				})
+		const getPrevious = from === 0
+			? function() {
+				props.getChannel({token: props.prevPageToken})
+				setThumbnailPages({from: 36, to: 48})
+			}
+			: () => setThumbnailPages({
+				from: from - 12,
+				to: to - 12
+			})
 
 		if (from > 0 || props.prevPageToken) {
 			buttons.push(
 				<PageButton 
-					toPrevious={() => setThumbnailPages({
-							from: from - 12,
-							to: to - 12
-						})
-					}
+					toPrevious={getPrevious}
 				/>
 			);
 		}
 
-		if ((to <= 48 && props.nextPageToken) || to < 48) {
+		if (props.nextPageToken) {
 			buttons.push(
 				<PageButton 
-					toNext={next} 
+					toNext={getNext} 
 				/>
 			);
 		}
