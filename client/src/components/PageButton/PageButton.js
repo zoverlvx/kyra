@@ -1,10 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
-//import { getChannel } from "../../actions";
 import { Button } from "@material-ui/core";
 
 export default function (props) {
+	// if component is given a prop called toPrevious
 	if (props.toPrevious) {
+		// return button with default previous button style and functionality
 		return (
 			<Button
 				color="primary"
@@ -15,8 +15,10 @@ export default function (props) {
 			</Button>
 		)
 	}
-
+	
+	// if component is given a prop called toNext
 	if (props.toNext) {
+		// return button with default next button style and functionality
 		return (
 			<Button
 				color="primary"
@@ -27,35 +29,7 @@ export default function (props) {
 			</Button>
 		)
 	}
-	
+
+	// otherwise zilch
 	return null;
 }
-
-/*
-export default connect(null, {getChannel})(function(props) {
-	const { prevPage, nextPage, getChannel} = props;
-	if (prevPage) { 
-		return (
-			<Button
-				color="primary"
-				variant="outlined"
-				onClick={() => 	getChannel({ token: prevPage })}	
-			>
-				Previous Page
-			</Button>
-		);
-	}
-	if (nextPage) { 
-		return (
-			<Button
-				color="primary"
-				variant="outlined"
-				onClick={() => getChannel({ token: nextPage })}	
-			>
-				Next Page
-			</Button>
-		);
-	}
-	return null;
-});
-*/
