@@ -7,7 +7,6 @@ export default function (props) {
 		// return button with default previous button style and functionality
 		return (
 			<Button
-				key="prev"
 				color="primary"
 				variant="outlined"
 				onClick={() => props.toPrevious()}
@@ -22,7 +21,6 @@ export default function (props) {
 		// return button with default next button style and functionality
 		return (
 			<Button
-				key="next"
 				color="primary"
 				variant="outlined"
 				onClick={() => props.toNext()}
