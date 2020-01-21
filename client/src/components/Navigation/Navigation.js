@@ -11,7 +11,6 @@ export default function({to, text}) {
 		<AppBar color="primary" position="static">
 			<Toolbar>
 				<Typography
-					variant="title"
 					color="inherit"
 				>
 					<NavLink 
