@@ -22,9 +22,21 @@ export default connect(
 	{getChannel}
 )(function (props) {
 	const { getChannel } = props;
+	
 	useEffect(() => {
-		getChannel();
-	}, [getChannel]);
+		// Get channel contents on first mount
+		getChannel(); 
+		const refresh = setInterval(() => {
+			/* renew at 12:01am every day */
+			const today = new Date();
+			const currentTime = `${today.getHours()}:${today.getMinutes()}`;
+			if (currentTime === "00:01") {
+				getChannel();
+			}
+		}, 20000)
+		return () => clearInterval(refresh)
+	}, [])
+
 	return (
 		<>
 			<Route 
