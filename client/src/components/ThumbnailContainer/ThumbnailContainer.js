@@ -59,6 +59,34 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 	if (!thumbnails.length) return <div>Loading...</div>;
 	// if there are thumbnails available
 	if (thumbnails.length) {
+		
+		const { from, to } = thumbnailPages;
+
+		const getNext = to === 48
+			? function () {
+				props.getChannel({token: props.nextPageToken});
+				setThumbnailPages({from: 0, to: 12});
+			}
+			: () => setThumbnailPages({
+				from: from + 12,
+				to: to + 12
+			});
+
+		const getPrevious = from === 0
+			? function () {
+				props.getChannel({token: props.prevPageToken});
+				setThumbnailPages({from: 36, to: 48});
+			}
+			: () => setThumbnailPages({
+				from: from - 12,
+				to: to - 12
+			});
+		
+		const conditions = {
+			forPrevious: from > 0 || props.prevPageToken,
+			forNext: props.nextPageToken
+		};
+
 		return (
 			<div 
 				className={classes.root}
@@ -70,10 +98,8 @@ export default connect(mapStateToProps, {getChannel})(function(props) {
 					>
 						{
 							makeButtons(
-								thumbnailPages, // displays 12 thumbnails at a time
-								setThumbnailPages, // moves indeces to show 12 new thumbnails from what's available
-								props // requests 48 new thumbnails from Youtube when the 48th of the last request has been reached,
-									// or when the very last of the current request has been reached
+								{getPrevious, getNext},
+								conditions
 							)
 						}
 					</ButtonGroup>
