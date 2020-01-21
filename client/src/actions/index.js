@@ -18,9 +18,9 @@ export function getChannel(options) {
 		if (options.token) {
 			URL += `&pageToken=${options.token}`;
 		}
-		// if there isn't a maxResults option, default to 12.
+		// if there isn't a maxResults option, default to 48.
 		if (!options.maxResults) {
-			URL += "&maxResults=12";
+			URL += "&maxResults=48";
 		}
 		// if there is a maxResults option, append it to the end.
 		if (options.maxResults && typeof options.maxResults === "number") {
@@ -31,7 +31,7 @@ export function getChannel(options) {
 	// if no options provided
 	if (!options) {
 		// default maxResults to 12 and append to the end.
-		URL += "&maxResults=12";
+		URL += "&maxResults=50";
 	}
 	
 	const channel = axios(URL);

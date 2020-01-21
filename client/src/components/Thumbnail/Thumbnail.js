@@ -16,6 +16,7 @@ export default function({video}) {
 		<GridListTile className={classes.gridList}>
 			<img
 				src={video.snippet.thumbnails.medium.url} 
+				alt=""
 			/>	
 		</GridListTile>
 	);

@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
-import Thumbnail from "../Thumbnail/Thumbnail.js";
+import { ButtonGroup } from "@material-ui/core";
+import {getChannel} from "../../actions";
+import makeThumbnail from "../utils/makeThumbnail.js";
+import makeButtons from "../utils/makeButtons.js";
+
 import { 
 	makeStyles, 
-	GridList
 } from "@material-ui/core";
 
+// defines styles used
 const useStyles = makeStyles(theme => ({
 	root: {
 		display: "flex",
@@ -17,27 +21,88 @@ const useStyles = makeStyles(theme => ({
 
 function mapStateToProps(state) {
 	return  {
+		nextPageToken: state.channel.nextPageToken 
+			? state.channel.nextPageToken : null,
+		prevPageToken: state.channel.prevPageToken
+			? state.channel.prevPageToken : null,
 		videos: state.channel.items,
 		error: state.error,
 		gettingChannel: state.gettingChannel
 	};
 }
 
-export default connect(mapStateToProps)(function(props) {
-	const classes = useStyles();
-
-	function makeThumbnail(item) {
-		return <Thumbnail video={item} />;
-	}
+export default connect(mapStateToProps, {getChannel})(function(props) {
 	
+	// sections out the range of thumbnails from redux state
+	// which will be made available to the view
+	const [thumbnails, setThumbnails] = useState([]);
+	const [thumbnailPages, setThumbnailPages] = useState({from: 0, to: 12})
+	
+	// uses styles
+	const classes = useStyles();
+	
+	
+	// use videos from redux state
+	const {videos} = props;
+	
+	useEffect(() => {
+		const { from, to } = thumbnailPages;
+
+		// once mounted, section off these videos for the view
+		setThumbnails(videos.slice(from, to))
+
+	}, [videos, thumbnailPages])
+	
+	// if there's an error, display error view
 	if (props.error) return <div>There's been an error</div>;
-	if (!props.videos.length) return <div>Loading...</div>;
-	if (props.videos.length) {
+	// if there are no thumbnails ready, display loading view
+	if (!thumbnails.length) return <div>Loading...</div>;
+	// if there are thumbnails available
+	if (thumbnails.length) {
+		
+		const { from, to } = thumbnailPages;
+
+		const getNext = to === 48
+			? function () {
+				props.getChannel({token: props.nextPageToken});
+				setThumbnailPages({from: 0, to: 12});
+			}
+			: () => setThumbnailPages({
+				from: from + 12,
+				to: to + 12
+			});
+
+		const getPrevious = from === 0
+			? function () {
+				props.getChannel({token: props.prevPageToken});
+				setThumbnailPages({from: 36, to: 48});
+			}
+			: () => setThumbnailPages({
+				from: from - 12,
+				to: to - 12
+			});
+		
+		const conditions = {
+			forPrevious: from > 0 || props.prevPageToken,
+			forNext: props.nextPageToken
+		};
+
 		return (
 			<div 
 				className={classes.root}
 			>
-					{props.videos.map(makeThumbnail)}
+					{thumbnails.map(makeThumbnail)}
+					<ButtonGroup
+						color="primary"
+						aria-label="outlined primary button group"
+					>
+						{
+							makeButtons(
+								{getPrevious, getNext},
+								conditions
+							)
+						}
+					</ButtonGroup>
 			</div>
 		);
 	}

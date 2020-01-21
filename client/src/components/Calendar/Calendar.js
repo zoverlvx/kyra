@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { getChannel } from "../../actions";
 import makeChart from "../utils/makeChart.js";
 
 /*
@@ -19,8 +20,12 @@ const Calendar = makeChart({
 
 function mapStateToProps(state) {
 	return {
-		videos:	state.channel.items
+		videos:	state.channel.items,
+		nextPageToken: state.channel.nextPageToken
+			? state.channel.nextPageToken : null,
+		prevPageToken: state.channel.prevPageToken
+			? state.channel.prevPageToken : null
 	};
 }
 
-export default connect(mapStateToProps)(Calendar);
+export default connect(mapStateToProps, {getChannel})(Calendar);
