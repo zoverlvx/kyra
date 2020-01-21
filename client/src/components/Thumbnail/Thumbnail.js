@@ -13,7 +13,9 @@ const useStyles = makeStyles(theme => ({
 export default function({video}) {
 	const classes = useStyles();
 	return (
-		<GridListTile className={classes.gridList}>
+		<GridListTile 
+			className={classes.gridList}
+		>
 			<img
 				src={video.snippet.thumbnails.medium.url} 
 				alt=""
