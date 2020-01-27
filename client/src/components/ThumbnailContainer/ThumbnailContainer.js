@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { connect } from "react-redux";
 import { ButtonGroup } from "@material-ui/core";
 import {getChannel} from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
