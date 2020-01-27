@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
 import { getChannel } from "../actions";
 import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer";
 import Calendar from "./Calendar/Calendar.js";
@@ -24,7 +23,7 @@ export default function() {
 			}
 		}, 20000)
 		return () => clearInterval(refresh)
-	}, [getChannel]);
+	}, [dispatch]);
 
 	return (
 		<>
