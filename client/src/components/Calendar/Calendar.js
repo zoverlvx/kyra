@@ -98,23 +98,3 @@ export default function() {
 		</>
 	);
 }
-
-/*
-const Calendar = makeChart({
-	width: 1000, 
-	height: 350, 
-	chartType: "Calendar"
-});
-
-function mapStateToProps(state) {
-	return {
-		videos:	state.channel.items,
-		nextPageToken: state.channel.nextPageToken
-			? state.channel.nextPageToken : null,
-		prevPageToken: state.channel.prevPageToken
-			? state.channel.prevPageToken : null
-	};
-}
-
-export default connect(mapStateToProps, {getChannel})(Calendar);
-*/
