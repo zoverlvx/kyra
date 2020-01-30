@@ -20,13 +20,14 @@ export default function() {
 	const videos = useSelector(state => state.channel.items);
 
 	const getPublishedDates = item => item.snippet.publishedAt;
+	
 	// gets published dates of videos
 	const publishedDates = [...videos].map(getPublishedDates);
 
 	// sorts dates chronologically
 	// TODO: this might be negatively affecting load time
 	// might not even need this in between how the db content is already set up and how the calendar component displays the data
-	const chronological = [...publishedDates].sort();
+	// const chronological = [...publishedDates].sort();
 
 	return (
 			<Chart 
@@ -47,7 +48,7 @@ export default function() {
 					],
 
 					//map through and spread everything else below
-					...chronological.map(function(
+					...publishedDates.map(function(
 						date
 					) {
 						return [
