@@ -24,11 +24,6 @@ export default function() {
 	// gets published dates of videos
 	const publishedDates = [...videos].map(getPublishedDates);
 
-	// sorts dates chronologically
-	// TODO: this might be negatively affecting load time
-	// might not even need this in between how the db content is already set up and how the calendar component displays the data
-	// const chronological = [...publishedDates].sort();
-
 	return (
 			<Chart 
 				width={1000}
