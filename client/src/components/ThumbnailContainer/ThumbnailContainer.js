@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { ButtonGroup } from "@material-ui/core";
 import {getChannel} from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import makeThumbnail from "../utils/makeThumbnail.js";
