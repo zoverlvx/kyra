@@ -6,7 +6,6 @@ import {
 	ButtonGroup,
 	Box
 } from "@material-ui/core";
-import { spacing } from "@material-ui/system";
 import { NavLink } from "react-router-dom";
 import makeButtons from "../utils/makeButtons.js";
 
