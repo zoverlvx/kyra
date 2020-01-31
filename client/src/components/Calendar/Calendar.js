@@ -1,8 +1,8 @@
-//import { connect } from "react-redux";
-//import makeChart from "../utils/makeChart.js";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Chart } from "react-google-charts";
+import { Box } from "@material-ui/core";
+import Media from "react-media";
 
 /*
 
@@ -18,47 +18,74 @@ If the data values are all positive, the colors will range from white to blue, w
 export default function() {
 	// maps state to props
 	const videos = useSelector(state => state.channel.items);
-
-	const getPublishedDates = item => item.snippet.publishedAt;
-	
-	// gets published dates of videos
-	const publishedDates = [...videos].map(getPublishedDates);
+	// gets published dates and titles of videos
+	const getPublishedVideos = item => ({title: item.snippet.title, publishedAt: item.snippet.publishedAt});
+	// array of objects with (title: string) and (date: string)	
+	const publishedVideos = [...videos].map(getPublishedVideos);
 
 	return (
-			<Chart 
-				width={1000}
-				height={350}
-				chartType={"Calendar"}
-				loader={<div>Loading</div>}
-				data={[
-					[
-						{
-							type: "date",
-							id: "Date"
-						},
-						{
-							type: "number",
-							id: "Produced"
-						}
-					],
+			<Media queries={{
+				mobile: "(min-width: 375px) and (max-width: 667px)"
+			}}>
+				{
+					matches => {
+						if (matches.mobile) {
+							return (
+								<ul style={{listStyleType: "none"}}>
+									{
+										publishedVideos.map(function (video, i) {
+											const date = new Date(video.publishedAt).toString();
+											return (
+												<Box mt={2} key={video.title}>
+													<li>{`${i+1}. ${video.title}`}</li>
+													<li>{`Published on: ${date.substring(0, 15)}`}</li>
+												</Box>
+											);
+										})
+									}
+								</ul>
+							);
+						} else {
+							return (
+								<Chart 
+									width={1000}
+									height={350}
+									chartType={"Calendar"}
+									loader={<div>Loading</div>}
+									data={[
+										[
+											{
+												type: "date",
+												id: "Date"
+											},
+											{
+												type: "number",
+												id: "Produced"
+											}
+										],
 
-					//map through and spread everything else below
-					...publishedDates.map(function(
-						date
-					) {
-						return [
-							new Date(date),
-							1 // sets it to blue
-						];
-					})
-				]}
-				options={{
-					title: "YouTube Videos Produced",
-					colorAxis: {
-						maxValue: 1,
-						minValue: 0
+										//map through and spread everything else below
+										...publishedVideos.map(function(
+											video
+										) {
+											return [
+												new Date(video.publishedAt),
+												1 // sets it to blue
+											];
+										})
+									]}
+									options={{
+										title: "YouTube Videos Produced",
+										colorAxis: {
+											maxValue: 1,
+											minValue: 0
+										}
+									}}
+								/>
+							)
+						}
 					}
-				}}
-			/>
+				}
+			</Media>
 	);
 }
