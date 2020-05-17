@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "env $(cat ./.env) node index.js"
+  },
+  "dependencies": {
+    "async": "^3.1.0",
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "knex": "^0.20.4",
+    "request": "^2.88.0",
+    "youtube-api-es6": "^1.0.3"
+  }
+}
