@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { Route } from "react-router-dom";
 import { getChannel } from "../actions";
+import Registration from "./auth/Registration.js";
+import Login from "./auth/Login.js";
+import PrivateRoute from "./auth/utils/PrivateRoute.js";
 import ThumbnailContainer from "./ThumbnailContainer/ThumbnailContainer";
 import Calendar from "./Calendar/Calendar.js";
 import Navigation from "./Navigation/Navigation.js";
@@ -40,12 +43,9 @@ export default function() {
 	
 	const {from, to} = thumbnailPages;
 
-		
-	return (
-		<>
-			<Route 
-				exact path="/"
-			>
+	function ThumbnailsPage(props) {
+		return (
+			<>
 				<Navigation 
 					to="/calendar" 
 					text="Go to Calendar"
@@ -90,12 +90,15 @@ export default function() {
 				<ThumbnailContainer 
 					thumbnailPages={thumbnailPages}
 				/>
-			</Route>
-			<Route 
-				path="/calendar" 
-			>
+			</>
+		);
+	}
+
+	function CalendarPage(props) {
+		return (
+			<>
 				<Navigation 
-					to="/" 
+					to="/thumbnails" 
 					text="Go to Thumbnails" 
 					conditions={{
 						forNext: nextPageToken, 
@@ -111,7 +114,28 @@ export default function() {
 					}}
 				/>
 				<Calendar />
-			</Route>
-		</>
+			</>
+		);
+	}
+		
+	return (
+		<div className="site-container">
+			<Route 
+				exact path="/"
+				render={props => <Registration {...props} />}
+			/>
+			<Route 
+				path="/login" 
+				render={props => <Login {...props} />}
+			/>
+			<PrivateRoute 
+				path="/calendar"
+				component={CalendarPage}
+			/>
+			<PrivateRoute
+				path="/thumbnails"
+				component={ThumbnailsPage}
+			/>
+		</div>
 	);
 }

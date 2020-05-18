@@ -35,8 +35,15 @@ Example: https://github.com/FoodStandardsAgency/register-a-food-business-front-e
 
 - **V. Build, release, run**
 Strictly separate build and run stages
+
+**For this project**
+Deploying to Heroku
+
 - **VI. Processes**
 Execute the app as one or more stateless processes
+
+
+
 - **VII. Port binding**
 Export services via port binding
 - **VIII. Concurrency**

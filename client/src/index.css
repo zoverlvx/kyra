@@ -11,3 +11,190 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.auth-container {
+	display: flex;
+	position: absolute;
+	width: 92.4w;
+	min-height: 95vh;
+	max-height: 95vh;
+	margin: 0 auto;
+	margin-top: 2%;
+	margin-bottom: 4%;
+	background: #ffffff;
+	border-radius: 5px;
+	z-index: 1;
+}
+
+.auth-header {
+	position: relative;
+	width: 30%;
+	height: 4.3rem;
+	left: 5%;
+	top: 10%;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 3.3rem;
+	line-height: 8.3rem;
+	text-align: left;
+	letter-spacing: 0.06em;
+	color: #0051be;
+}
+
+.dontHave {
+	position: absolute;
+	width: 50%;
+	height: auto;
+	left: 5%;
+	top: 15%;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.8rem;
+	line-height: 22px;
+	letter-spacing: 0.06em;
+	color: #313131;
+}
+
+.error {
+	font-size: 1.4rem;
+	color: #ff9494;
+	font-weight: 700;
+	margin: 1rem 0.5rem;
+}
+
+label {
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 2.4rem;
+	color: #313131;
+}
+
+.login-form {
+	height: 58vh;
+	width: 38vw;
+	position: absolute;
+	top: 27%;
+	left: 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+}
+
+.login-form .email {
+	height: 25%;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-form .password {
+	height: 33%;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-form input {
+	width: 100%;
+	height: 30%;
+	border: none;
+	fill: solid;
+	background: #f4f5f9;
+	border-radius: 5px;
+	margin-top: 2.5%;
+	padding-left: 1.5%;
+	font-size: 1.8rem;
+	&::placeholder {
+		font-size: 1.6rem;
+		padding-left: 1.5%;
+	}
+}
+
+.register-form {
+	height: 55vh;
+	width: 38vw;
+	position: absolute;
+	top: 30%;
+	left: 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+}
+
+.register-form input {
+	font-size: 1.5rem;
+	height: 40%;
+	border: none;
+	fill: solid;
+	background: #f4f5f9;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+
+.register-form .names {
+	height: 30%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.register-form .names .first-name {
+	width: 48.5%;
+	display: flex;
+	flex-direction: column;
+}
+
+.register-form .names .last-name {
+	width: 48.5%;
+	display: flex;
+	flex-direction: column;
+}
+
+.register-form .email {
+	width: 100%;
+	height: 30%;
+	display: flex;
+	flex-direction: column;
+}
+
+.register-form .email input {
+	width: 80%;
+}
+
+.register-form .passwords {
+	height: 30%;
+	width: 100%;
+	display: flex;
+}
+
+.register-form .passwords .password {
+	width: 48.5%;
+	display: flex;
+	flex-direction: column;
+}
+
+.register-form .passwords .confirm-password {
+	width: 48.5%;
+	display: flex;
+	flex-direction: column;
+}
+
+.register-form button {
+	position: absolute;
+	width: 25%;
+	height: 10%;
+	left: 0;
+	top: 88%;
+	bottom: 0.4%;
+	background: #0051be;
+	border-radius: 5px;
+	color: #ffffff;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 1.8rem;
+	line-height: 22px;
+}
